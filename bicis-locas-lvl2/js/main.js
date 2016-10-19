@@ -2,8 +2,14 @@
 Minimum 8 and Maximum 10 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character: */
 var boxes = document.getElementsByClassName("input-box");
 var i;
+var removeSpan = document.getElementsByTagName("span");
 //Funcion que llama a las funciones de validacion
 function validateForm(){
+	while(removeSpan.length > 1){
+		for(var k = 0; k<removeSpan.length-1 ; k++){
+			removeSpan[k].parentNode.removeChild(removeSpan[k]);
+		}	
+	}
 	validarNombre();
 	validarApellido();
 	validarCorreo();
@@ -21,9 +27,8 @@ function validarNombre(){
 	//Validacion
 	if(!(regexNombre.test(nombre)) || (espacio.test(nombre))){
 		//alert("Campo nombre incorrecto");
-		i = 0;
 		var t = document.createTextNode("Campo nombre incorrecto");
-		crearSpan(t, i);
+		crearSpan(t, 0);
 		return false;
 	}
 	return true;
@@ -41,6 +46,7 @@ function validarApellido(){
 		crearSpan(t,i);
 		return false;
 	}
+	return true;
 }
 
 function validarCorreo(){
@@ -87,7 +93,8 @@ function validarLista(){
 }
 
 function crearSpan(t, i){
-	var Span = document.createElement('span');
-	Span.appendChild(t);
-	boxes[i].appendChild(Span);
+		var Span = document.createElement('span');
+		Span.appendChild(t);
+		boxes[i].appendChild(Span);
 }
+
