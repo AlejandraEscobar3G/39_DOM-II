@@ -1,5 +1,3 @@
-/*Para validación de la contraseña: 
-Minimum 8 and Maximum 10 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character: */
 var boxes = document.getElementsByClassName("input-box");
 var i;
 var removeSpan = document.getElementsByTagName("span");
@@ -23,11 +21,11 @@ function validateForm(){
 function validarNombre(){
 	var nombre = document.getElementById("name").value;
 	var espacio = /^\s+$/;
-	var regexNombre = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+	var regexNombre = /^[A-Z][a-z]*$/;
 	//Validacion
-	if(!(regexNombre.test(nombre)) || (espacio.test(nombre))){
+	if(!(regexNombre.test(nombre))){
 		//alert("Campo nombre incorrecto");
-		var t = document.createTextNode("Campo nombre incorrecto");
+		var t = document.createTextNode("La primer letra debe ser mayúscula");
 		crearSpan(t, 0);
 		return false;
 	}
@@ -37,12 +35,12 @@ function validarNombre(){
 function validarApellido(){
 	var espacio = /^\s+$/;
 	var apellido = document.getElementById("lastname").value;
-	var regexNombre = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+	var regexNombre = /^[A-Z][a-z]*$/;
 	//Validación
-	if(!(regexNombre.test(apellido)) || (espacio.test(apellido))){
+	if(!(regexNombre.test(apellido))){
 		//alert("Campo apellido incorrecto");
 		i = 1;
-		var t = document.createTextNode("Campo apellido incorrecto");
+		var t = document.createTextNode("La primer letra debe ser mayúscula");
 		crearSpan(t,i);
 		return false;
 	}
@@ -66,12 +64,23 @@ function validarCorreo(){
 
 function validarPassword(){
 	var pass = document.getElementById("input-password").value;
-	var regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/;
+	i = 3;
 	//Validación
-	if(!(regexPassword.test(pass))){
-		//alert("Campo contraseña incorrecto");
-		i = 3; 
-		var t = document.createTextNode("Campo contraseña incorrecto");
+	if(pass.length <6){
+		//alert("Campo contraseña incorrecto"); 
+		var t = document.createTextNode("La contraseña debe tener al menos 6 caracteres");
+		crearSpan(t,i);
+		return false;
+	} else if(pass == "password"){
+		var t = document.createTextNode("La contraseña no puede ser 'password'");
+		crearSpan(t,i);
+		return false;
+	} else if(pass === "123456"){
+		var t = document.createTextNode("La contraseña no puede ser '123456'");
+		crearSpan(t,i);
+		return false;
+	} else if(pass === "098754"){
+		var t = document.createTextNode("La contraseña no puede ser '098754'");
 		crearSpan(t,i);
 		return false;
 	}
@@ -84,7 +93,7 @@ function validarLista(){
 	if( indice == null || indice == 0 ) {
   		//alert("Campo lista vacío");
   		i = 4;
-		var t = document.createTextNode("Campo lista incorrecto");
+		var t = document.createTextNode("Campo lista vacío");
 		crearSpan(t,i);
   		return false;
 	}
